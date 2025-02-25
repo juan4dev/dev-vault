@@ -1,16 +1,11 @@
 namespace Catalogo.Domain.Abstractions;
 
-public abstract class Entity
+public abstract class Entity(Guid id)
 {
 
     private readonly List<IDomainEvents> _domainEvents = [];
 
-    public Guid Id { get; set; }
-
-    protected Entity(Guid id)
-    {
-        Id = id;
-    }
+    public Guid Id { get; set; } = id;
 
     public IReadOnlyList<IDomainEvents> DomainEvents => _domainEvents;
 
@@ -19,7 +14,7 @@ public abstract class Entity
         _domainEvents.Clear();
     }
 
-    protected void AddDomainEvent(IDomainEvents domainEvent)
+    public void RaiseDomainEvent(IDomainEvents domainEvent)
     {
         _domainEvents.Add(domainEvent);
     }
