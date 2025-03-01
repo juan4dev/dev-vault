@@ -2,7 +2,6 @@ namespace Catalogo.Domain.Abstractions;
 
 public abstract class Entity(Guid id)
 {
-
     private readonly List<IDomainEvents> _domainEvents = [];
 
     public Guid Id { get; set; } = id;
