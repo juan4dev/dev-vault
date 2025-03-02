@@ -15,13 +15,16 @@ public class Product : Entity
 
     public Guid CategoryId { get; set; }
 
+    public string Code { get; set; }
+
     private Product(
         Guid id,
         string name,
         decimal price,
         string imageUrl,
         string description,
-        Guid categoryId
+        Guid categoryId,
+        string code
 
         ) : base(id)
     {
@@ -31,6 +34,7 @@ public class Product : Entity
         Description = description;
         CategoryId = categoryId;
         CategoryId = categoryId;
+        Code = code;
     }
 
     public static Product Create(
@@ -38,11 +42,12 @@ public class Product : Entity
         decimal price,
         string imageUrl,
         string description,
-        Guid categoryId
+        Guid categoryId,
+        string code
         )
     {
         var guid = Guid.NewGuid();
-        var product = new Product(guid, name, price, imageUrl, description, categoryId);
+        var product = new Product(guid, name, price, imageUrl, description, categoryId, code);
         var productCreatedDomainEvent = new ProductCreatedDomainEvent(guid);
         product.RaiseDomainEvent(productCreatedDomainEvent);
         return product;
