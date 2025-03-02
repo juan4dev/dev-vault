@@ -1,3 +1,4 @@
+using Catalogo.Api.Extensions;
 using Catalogo.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.ApplyMigration();
 
 app.UseHttpsRedirection();
 
