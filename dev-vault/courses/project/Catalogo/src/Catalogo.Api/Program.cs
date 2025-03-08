@@ -31,6 +31,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.ApplyMigration();
+await app.SeedCatalogoProductAsync();
 
 app.UseHttpsRedirection();
 

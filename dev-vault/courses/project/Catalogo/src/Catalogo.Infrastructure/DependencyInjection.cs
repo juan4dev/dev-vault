@@ -1,4 +1,5 @@
 ﻿using Catalogo.Domain.Abstractions;
+using Catalogo.Domain.Categories;
 using Catalogo.Domain.Products;
 using Catalogo.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ public static class DependencyInjection
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<CatalogoDbContext>());
 
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
 
         return services;
     }
