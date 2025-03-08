@@ -4,9 +4,9 @@ public interface IProductRepository
 {
     Task AddAsync(Product product);
 
-    Task<IEnumerable<Product>> GetAllAsync();
+    Task<IEnumerable<Product>> GetAllAsync(CancellationToken cancellationToken = default);
 
-    Task<Product> GetByIdAsync(Guid id);
+    Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
-    Task<Product> GetByCode(string code);
+    Task<Product?> GetByCode(string code, CancellationToken cancellationToken = default);
 }
