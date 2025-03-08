@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Catalogo.Domain.Products;
+using Catalogo.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -16,6 +18,9 @@ public static class DependencyInjection
             options.UseSqlite(configuration.GetConnectionString("SqliteProduct"))
                    .UseSnakeCaseNamingConvention();
         });
+
+        services.AddScoped<IProductRepository, ProductRepository>();
+
         return services;
     }
 }

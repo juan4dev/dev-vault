@@ -1,0 +1,13 @@
+{
+	"nodes":[
+		{"id":"a6dabac4dc9e6e27","type":"text","text":"Command","x":-277,"y":-140,"width":250,"height":60,"color":"4"},
+		{"id":"5d7186678099e015","type":"text","text":"Query","x":-277,"y":60,"width":250,"height":60,"color":"4"},
+		{"id":"2eba4c64ff79c5d5","type":"text","text":"Web Api","x":-277,"y":-36,"width":250,"height":60,"color":"6"},
+		{"id":"30088d7a45d35104","type":"text","text":"Command Handler","x":100,"y":-140,"width":290,"height":60,"color":"#ff5c5c"},
+		{"id":"30122f2da20f0a9f","type":"text","text":"Query handler","x":100,"y":60,"width":290,"height":60,"color":"#ff5c5c"},
+		{"id":"160417b133560432","type":"text","text":"Application","x":120,"y":-36,"width":250,"height":60,"color":"1"},
+		{"id":"eb797807efdb7250","type":"text","text":"Domain","x":540,"y":-36,"width":250,"height":60,"color":"5"},
+		{"id":"ce064d1f34af1ba7","type":"text","text":"Persistence EF","x":540,"y":60,"width":250,"height":60,"color":"4"}
+	],
+	"edges":[]
+}

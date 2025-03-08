@@ -30,8 +30,42 @@ dotnet add .\src\Catalogo.Application\ reference .\src\Catalogo.Domain\
 dotnet add .\src\Catalogo.Infrastructure\ reference .\src\Catalogo.Application\
 dotnet add .\src\Catalogo.Api\ reference .\src\Catalogo.Infrastructure\
 
-# Add MediatR (example package)
+# Add MediatR (example package) in Catalogo.Domain
 dotnet add package MediatR.Contracts
 
 # Open the solution in VS Code
 code .
+
+Infrastructure
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet add package EFCore.NamingConventions
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+
+Catalogo.Api
+dotnet add package Microsoft.EntityFrameworkCore.Design
+
+# Migraciones
+dotnet tool install --global dotnet-ef
+
+dotnet ef migrations add InitialCatalogoProduct -p src/Catalogo.Infrastructure -s src
+dotnet ef migrations add AddCodeToProduct -p src/Catalogo.Infrastructure
+
+CQRS
+
+C => COMMAND => INSERTAR NUEVOS DATOS
+Q => QUERY => CONSULTAR DATOS
+R => RESPONSABILITY
+S => SEGREGATION
+
+Depende del tipo de request que envia el cliente 
+
+command => alteración de data.
+query => consultar data.
+
+cd src/Catalogo.Application
+
+dotnet add package MediatR
+
+dotnet add package FluentValidation.AspNetCore
+
