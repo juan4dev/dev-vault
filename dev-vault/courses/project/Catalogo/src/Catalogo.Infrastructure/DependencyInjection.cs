@@ -11,8 +11,10 @@ public static class DependencyInjection
     {
         services.AddDbContext<CatalogoDbContext>(options =>
         {
-            options.LogTo(Console.WriteLine, [DbLoggerCategory.Database.Command.Name], LogLevel.Information).EnableSensitiveDataLogging();
-            options.UseSqlite(configuration.GetConnectionString("SqliteProduct"));
+            options.LogTo(Console.WriteLine, [DbLoggerCategory.Database.Command.Name], LogLevel.Information)
+                   .EnableSensitiveDataLogging();
+            options.UseSqlite(configuration.GetConnectionString("SqliteProduct"))
+                   .UseSnakeCaseNamingConvention();
         });
         return services;
     }
