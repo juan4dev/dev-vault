@@ -69,3 +69,6 @@ dotnet add package MediatR
 
 dotnet add package FluentValidation.AspNetCore
 
+cd src/Catalogo.Api
+
+dotnet add package Swashbuckle.AspNetCore

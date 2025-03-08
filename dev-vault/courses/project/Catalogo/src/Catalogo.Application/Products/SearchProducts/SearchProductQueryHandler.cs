@@ -14,6 +14,6 @@ internal sealed class SearchProductQueryHandler : IRequestHandler<SearchProductQ
 
     public async Task<Product> Handle(SearchProductQuery request, CancellationToken cancellationToken)
     {
-        return await _repository.GetByCode(request.Code, cancellationToken) ?? throw new KeyNotFoundException("Product not found");
+        return await _repository.GetByCode(request.Code, cancellationToken) ?? throw new KeyNotFoundException();
     }
 }
