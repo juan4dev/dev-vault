@@ -61,7 +61,6 @@ namespace Catalogo.Infrastructure.Migrations
                         .HasColumnName("description");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("image_url");
 

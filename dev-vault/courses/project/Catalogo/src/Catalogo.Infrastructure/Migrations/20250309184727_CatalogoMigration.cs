@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -30,7 +31,7 @@ namespace Catalogo.Infrastructure.Migrations
                     id = table.Column<Guid>(type: "TEXT", nullable: false),
                     name = table.Column<string>(type: "TEXT", nullable: false),
                     price = table.Column<decimal>(type: "TEXT", nullable: false),
-                    image_url = table.Column<string>(type: "TEXT", nullable: false),
+                    image_url = table.Column<string>(type: "TEXT", nullable: true),
                     description = table.Column<string>(type: "TEXT", nullable: false),
                     category_id = table.Column<Guid>(type: "TEXT", nullable: false),
                     code = table.Column<string>(type: "TEXT", nullable: false)

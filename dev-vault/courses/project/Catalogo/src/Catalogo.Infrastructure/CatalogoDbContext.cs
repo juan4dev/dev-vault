@@ -1,12 +1,16 @@
 ﻿using Catalogo.Domain.Abstractions;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Catalogo.Infrastructure;
 
 public sealed class CatalogoDbContext : DbContext, IUnitOfWork
 {
-    public CatalogoDbContext(DbContextOptions options) : base(options)
+    private readonly IPublisher _publisher;
+
+    public CatalogoDbContext(DbContextOptions options, IPublisher publisher) : base(options)
     {
+        _publisher = publisher;
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -17,6 +21,27 @@ public sealed class CatalogoDbContext : DbContext, IUnitOfWork
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        return await base.SaveChangesAsync(cancellationToken);
+        var result = await base.SaveChangesAsync(cancellationToken);
+        await PublishNotifications(cancellationToken);
+
+        return result;
+    }
+
+    private async Task PublishNotifications(CancellationToken cancellationToken)
+    {
+        var domainEventNotifications = ChangeTracker
+                 .Entries<Entity>()
+                 .Select(entry => entry.Entity)
+                 .SelectMany(entity =>
+                 {
+                     var eventNotifications = entity.DomainEvents;
+                     entity.ClearDomainEvents();
+                     return eventNotifications;
+                 }).ToList();
+
+        foreach (var domainEvent in domainEventNotifications)
+        {
+            await _publisher.Publish(domainEvent, cancellationToken);
+        }
     }
 }

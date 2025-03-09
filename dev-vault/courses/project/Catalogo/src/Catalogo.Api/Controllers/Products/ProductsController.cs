@@ -1,5 +1,7 @@
-﻿using Catalogo.Application.Dtos;
+﻿using Catalogo.Api.Dtos;
+using Catalogo.Application.Dtos;
 using Catalogo.Application.Products.AllProducts;
+using Catalogo.Application.Products.CreateProduct;
 using Catalogo.Application.Products.SearchProducts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -45,5 +47,20 @@ public class ProductsController : ControllerBase
         var products = await _sender.Send(query, cancellationToken);
 
         return Ok(products);
+    }
+
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [Produces("application/json")]
+    public async Task<ActionResult<ProductDto>> Create([FromBody] ProductRequest productRequest)
+    {
+        var command = new CreateProductCommand(
+            productRequest.Name,
+            productRequest.Description,
+            productRequest.Price,
+            productRequest.CategoryId
+        );
+        var createdProduct = await _sender.Send(command);
+        return Ok(createdProduct);
     }
 }

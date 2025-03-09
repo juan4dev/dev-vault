@@ -9,7 +9,7 @@ public class Product : Entity
 
     public decimal Price { get; set; }
 
-    public string ImageUrl { get; set; }
+    public string? ImageUrl { get; set; }
 
     public string Description { get; set; }
 
@@ -21,7 +21,7 @@ public class Product : Entity
         Guid id,
         string name,
         decimal price,
-        string imageUrl,
+        string? imageUrl,
         string description,
         Guid categoryId,
         string code
@@ -40,13 +40,18 @@ public class Product : Entity
     public static Product Create(
         string name,
         decimal price,
-        string imageUrl,
+        string? imageUrl,
         string description,
         Guid categoryId,
-        string code
+        string? code
         )
     {
         var guid = Guid.CreateVersion7();
+        if(string.IsNullOrWhiteSpace(code))
+        {
+            code = $"{name[..Math.Min(name.Length, 5)].ToUpper()}-{guid.ToString("N")[..8]}";
+        }
+
         var product = new Product(guid, name, price, imageUrl, description, categoryId, code);
         var productCreatedDomainEvent = new ProductCreatedDomainEvent(guid);
         product.RaiseDomainEvent(productCreatedDomainEvent);

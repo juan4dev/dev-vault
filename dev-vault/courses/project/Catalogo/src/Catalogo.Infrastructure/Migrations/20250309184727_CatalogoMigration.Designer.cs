@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Catalogo.Infrastructure.Migrations
 {
     [DbContext(typeof(CatalogoDbContext))]
-    [Migration("20250309133717_CatalogoMigration")]
+    [Migration("20250309184727_CatalogoMigration")]
     partial class CatalogoMigration
     {
         /// <inheritdoc />
@@ -64,7 +64,6 @@ namespace Catalogo.Infrastructure.Migrations
                         .HasColumnName("description");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("TEXT")
                         .HasColumnName("image_url");
 
