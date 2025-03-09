@@ -16,7 +16,7 @@ public class ProductsController : ControllerBase
         _sender = sender;
     }
 
-    [HttpGet("{code}")]
+    [HttpGet("code/{code}")]
     [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [Produces("application/json")]
