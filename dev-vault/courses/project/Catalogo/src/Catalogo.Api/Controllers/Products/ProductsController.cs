@@ -1,4 +1,5 @@
 ﻿using Catalogo.Application.Dtos;
+using Catalogo.Application.Products.AllProducts;
 using Catalogo.Application.Products.SearchProducts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -33,5 +34,16 @@ public class ProductsController : ControllerBase
         {
             return NotFound("Product not found");
         }
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<ProductDto>), StatusCodes.Status200OK)]
+    [Produces("application/json")]
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetAll(CancellationToken cancellationToken)
+    {
+        var query = new AllProductsQuery();
+        var products = await _sender.Send(query, cancellationToken);
+
+        return Ok(products);
     }
 }

@@ -9,11 +9,6 @@ internal sealed class ProductRepository : Repository<Product>, IProductRepositor
     {
     }
 
-    public async Task<IEnumerable<Product>> GetAllAsync(CancellationToken cancellationToken = default)
-    {
-        return await _context.Set<Product>().ToListAsync(cancellationToken);
-    }
-
     public async Task<Product?> GetByCode(string code, CancellationToken cancellationToken = default)
     {
         return await _context.Set<Product>()

@@ -16,6 +16,11 @@ public static class ProductMapper
             product.CategoryId
         );
     }
+
+    public static IEnumerable<ProductDto> ToDtoList(this IEnumerable<Product> products)
+    {
+        return products.Select(p => p.ToDto());
+    }
 }
 
 public sealed record ProductDto(

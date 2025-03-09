@@ -5,3 +5,7 @@ Accept: application/json
 
 ###
 
+GET {{Catalogo.Api_HostAddress}}/products
+Accept: application/json
+
+###
