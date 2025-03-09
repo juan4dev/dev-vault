@@ -1,5 +1,5 @@
-﻿using Catalogo.Application.Products.SearchProducts;
-using Catalogo.Domain.Products;
+﻿using Catalogo.Application.Dtos;
+using Catalogo.Application.Products.SearchProducts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,10 +17,10 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet("code/{code}")]
-    [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProductDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [Produces("application/json")]
-    public async Task<ActionResult<Product>> GetByCode([FromRoute] string code, CancellationToken cancellationToken)
+    public async Task<ActionResult<ProductDto>> GetByCode([FromRoute] string code, CancellationToken cancellationToken)
     {
         try
         {

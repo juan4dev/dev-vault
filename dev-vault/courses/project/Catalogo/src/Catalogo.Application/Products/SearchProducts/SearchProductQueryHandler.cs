@@ -1,9 +1,10 @@
-﻿using Catalogo.Domain.Products;
+﻿using Catalogo.Application.Dtos;
+using Catalogo.Domain.Products;
 using MediatR;
 
 namespace Catalogo.Application.Products.SearchProducts;
 
-internal sealed class SearchProductQueryHandler : IRequestHandler<SearchProductQuery, Product>
+internal sealed class SearchProductQueryHandler : IRequestHandler<SearchProductQuery, ProductDto>
 {
     private readonly IProductRepository _repository;
 
@@ -12,8 +13,10 @@ internal sealed class SearchProductQueryHandler : IRequestHandler<SearchProductQ
         _repository = repository;
     }
 
-    public async Task<Product> Handle(SearchProductQuery request, CancellationToken cancellationToken)
+    public async Task<ProductDto> Handle(SearchProductQuery request, CancellationToken cancellationToken)
     {
-        return await _repository.GetByCode(request.Code, cancellationToken) ?? throw new KeyNotFoundException();
+        var product = await _repository.GetByCode(request.Code, cancellationToken) ?? throw new KeyNotFoundException();
+
+        return product.ToDto();
     }
 }
