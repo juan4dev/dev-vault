@@ -15,11 +15,12 @@ namespace Catalogo.Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    name = table.Column<string>(type: "TEXT", nullable: true)
+                    name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_categories", x => x.id);
+                    table.UniqueConstraint("ak_categories_name", x => x.name);
                 });
 
             migrationBuilder.CreateTable(

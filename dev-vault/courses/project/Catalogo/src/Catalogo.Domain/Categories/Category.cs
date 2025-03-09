@@ -5,17 +5,19 @@ namespace Catalogo.Domain.Categories;
 
 public class Category : Entity
 {
-    public string? Name { get; private set; }
+    public string Name { get; set; }
 
-    private Category(Guid id, string name) : base(id)
+    private Category(Guid id) : base(id)
     {
-        Name = name;
     }
 
     public static Category Create(string name)
     {
-        var id = Guid.NewGuid();
-        var category = new Category(id, name);
+        var id = Guid.CreateVersion7();
+        var category = new Category(id)
+        {
+            Name = name
+        };
 
         var domainEvent = new CategoryCreatedEvent(id);
         category.RaiseDomainEvent(domainEvent);

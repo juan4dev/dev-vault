@@ -43,7 +43,8 @@ public static class DataSeed
                 {
                     var category = i > 5 ? computerCategory : phoneCategory;
                     var categoryPrefix = category.Name == "Computers" ? "CMP" : "PHN";
-                    var productCode = $"{categoryPrefix}-{hashids.Encode(category.Id.GetHashCode(), i)}";
+                    var categoryCodePart = category.Id.ToString("N")[..4].ToUpper();
+                    var productCode = $"{categoryPrefix}-{categoryCodePart}-{i:D4}";
 
                     var product = Product.Create(
                         faker.Commerce.ProductName(),

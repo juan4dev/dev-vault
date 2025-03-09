@@ -25,11 +25,16 @@ namespace Catalogo.Infrastructure.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("TEXT")
                         .HasColumnName("name");
 
                     b.HasKey("Id")
                         .HasName("pk_categories");
+
+                    b.HasAlternateKey("Name")
+                        .HasName("ak_categories_name");
 
                     b.ToTable("categories", (string)null);
                 });

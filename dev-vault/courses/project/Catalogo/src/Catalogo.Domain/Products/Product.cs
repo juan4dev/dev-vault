@@ -46,7 +46,7 @@ public class Product : Entity
         string code
         )
     {
-        var guid = Guid.NewGuid();
+        var guid = Guid.CreateVersion7();
         var product = new Product(guid, name, price, imageUrl, description, categoryId, code);
         var productCreatedDomainEvent = new ProductCreatedDomainEvent(guid);
         product.RaiseDomainEvent(productCreatedDomainEvent);
